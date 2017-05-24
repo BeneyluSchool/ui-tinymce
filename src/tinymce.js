@@ -87,6 +87,18 @@ angular.module('ui.tinymce', [])
               if (form) {
                 form.$setPristine();
               }
+
+                            // set custom textarea title
+                            var editor = this.editorManager.activeEditor;
+                            var ifr = tinymce.DOM.get(editor.id+'_ifr');
+                            var labelId = tinymce.DOM.getAttrib(editor.id, 'aria-labelledby');
+                            if(document.getElementById(labelId)){
+                                var labelText = document.getElementById(labelId).innerText;
+                                if(labelText) {
+                                    labelText = labelText + ' Press ALT-F9 for menu. Press ALT-F10 for toolbar. Press ALT-0 for help';
+                                    editor.dom.setAttrib(ifr, 'title', labelText);
+                                }
+                            }
             });
 
             // Update model when:
